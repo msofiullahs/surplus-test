@@ -58,6 +58,10 @@ class ImageController extends Controller
             ]);
         }
 
+        if ($request->has('products')) {
+            $image->products()->sync($request->products);
+        }
+
         return response()->json($image, Response::HTTP_CREATED);
     }
 

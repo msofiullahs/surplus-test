@@ -49,6 +49,14 @@ class ProductController extends Controller
             ]);
         }
 
+        if ($request->has('categories')) {
+            $product->categories()->sync($request->categories);
+        }
+
+        if ($request->has('images')) {
+            $product->images()->sync($request->images);
+        }
+
         return response()->json($product, Response::HTTP_CREATED);
     }
 

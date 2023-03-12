@@ -45,6 +45,10 @@ class CategoryController extends Controller
             ]);
         }
 
+        if ($request->has('products')) {
+            $category->products()->sync($request->products);
+        }
+
         return response()->json($category, Response::HTTP_CREATED);
     }
 
