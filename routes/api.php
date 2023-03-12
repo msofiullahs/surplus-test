@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\ImageController;
 use App\Http\Controllers\ProductController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -29,4 +30,9 @@ Route::prefix('product')->as('product.')->group(function (){
     Route::get('/', [ProductController::class, 'index'])->name('index');
     Route::post('/store/{id?}', [ProductController::class, 'store'])->name('store');
     Route::get('/delete/{id}', [ProductController::class, 'delete'])->name('delete');
+});
+Route::prefix('image')->as('image.')->group(function (){
+    Route::get('/', [ImageController::class, 'index'])->name('index');
+    Route::post('/store/{id?}', [ImageController::class, 'store'])->name('store');
+    Route::get('/delete/{id}', [ImageController::class, 'delete'])->name('delete');
 });

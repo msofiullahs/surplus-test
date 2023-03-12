@@ -11,7 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        //
+        Schema::create('product_image', function (Blueprint $table) {
+            $table->bigInteger('product_id');
+            $table->bigInteger('image_id');
+            $table->index(['product_id', 'image_id']);
+        });
     }
 
     /**
@@ -19,6 +23,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        //
+        Schema::dropIfExists('product_image');
     }
 };

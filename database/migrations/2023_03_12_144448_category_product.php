@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('category_product', function (Blueprint $table) {
             $table->bigInteger('product_id');
             $table->bigInteger('category_id');
+            $table->index(['product_id', 'category_id']);
         });
     }
 
