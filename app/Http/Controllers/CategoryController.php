@@ -9,6 +9,13 @@ use App\Models\Category;
 
 class CategoryController extends Controller
 {
+    public function index(Request $request)
+    {
+        $categories = Category::all();
+
+        return response()->json($categories, Response::HTTP_OK);
+    }
+
     public function store($id = null, Request $request)
     {
         $validate = Validator::make($request->all(), [
