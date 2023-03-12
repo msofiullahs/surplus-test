@@ -25,9 +25,9 @@ class ProductController extends Controller
         ]);
         if (empty($id)) {
             $validate = Validator::make($request->all(), [
-                'name'          => 'required, string',
-                'description'   => 'required, string',
-                'enable'        => 'required, boolean'
+                'name'          => 'required|string',
+                'description'   => 'required|string',
+                'enable'        => 'required|boolean'
             ]);
         }
 
@@ -37,7 +37,7 @@ class ProductController extends Controller
 
         if (!empty($id)) {
             $product = Product::find($id)->update([
-                'name'  => $request->name,
+                'name'          => $request->name,
                 'description'   => $request->description,
                 'enable'        => $request->enable
             ]);

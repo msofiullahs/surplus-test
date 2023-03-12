@@ -24,8 +24,8 @@ class CategoryController extends Controller
         ]);
         if (empty($id)) {
             $validate = Validator::make($request->all(), [
-                'name'      => 'required, string',
-                'enable'    => 'required, boolean'
+                'name'      => 'required|string',
+                'enable'    => 'required|boolean'
             ]);
         }
 
