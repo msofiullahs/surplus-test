@@ -16,7 +16,7 @@ class ProductController extends Controller
         return response()->json($products, Response::HTTP_OK);
     }
 
-    public function store($id = null, Request $request)
+    public function store(Request $request, $id = null)
     {
         $validate = Validator::make($request->all(), [
             'name'          => 'string',
@@ -36,7 +36,8 @@ class ProductController extends Controller
         }
 
         if (!empty($id)) {
-            $product = Product::find($id)->update([
+            $product = Product::find($id);
+            $product->update([
                 'name'          => $request->name,
                 'description'   => $request->description,
                 'enable'        => $request->enable

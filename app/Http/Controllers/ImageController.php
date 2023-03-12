@@ -18,7 +18,7 @@ class ImageController extends Controller
         return response()->json($images, Response::HTTP_OK);
     }
 
-    public function store($id = null, Request $request)
+    public function store(Request $request, $id = null)
     {
         $validate = Validator::make($request->all(), [
             'name'  => 'string',
@@ -40,12 +40,14 @@ class ImageController extends Controller
         $img = $request->file;
         $ext = explode('/', mime_content_type($img))[1];
         $imgName = "image-".time().".".$ext;
-        $value = base64_decode($img);
-        Storage::disk('product-images')->put($imgName, $value);
-        $imgPath = public_path('storage/product-images/'.$imgName);
+        $replace = str_replace('data:image/png;base64,', '', $img);
+        $value = base64_decode($replace);
+        Storage::disk('public')->put($imgName, $value);
+        $imgPath = public_path('storage/'.$imgName);
 
         if (!empty($id)) {
-            $image = Image::find($id)->update([
+            $image = Image::findOrFail($id);
+            $image->update([
                 'name'  => $request->name,
                 'file'  => $imgPath,
                 'enable'=> $request->enable

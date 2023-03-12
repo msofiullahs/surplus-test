@@ -16,7 +16,7 @@ class CategoryController extends Controller
         return response()->json($categories, Response::HTTP_OK);
     }
 
-    public function store($id = null, Request $request)
+    public function store(Request $request, $id = null)
     {
         $validate = Validator::make($request->all(), [
             'name'      => 'string',
@@ -34,7 +34,8 @@ class CategoryController extends Controller
         }
 
         if (!empty($id)) {
-            $category = Category::find($id)->update([
+            $category = Category::findOrFail($id);
+            $category->update([
                 'name'=> $request->name,
                 'enable'=> $request->enable
             ]);
